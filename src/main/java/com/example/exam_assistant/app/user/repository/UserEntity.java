@@ -1,7 +1,9 @@
 package com.example.exam_assistant.app.user.repository;
 
-import com.example.exam_assistant.app.user.domain.User;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -24,12 +26,5 @@ public class UserEntity {
     private String username;
 
     private String email;
-
-    public static UserEntity fromDomain(User user) {
-        return UserEntity.builder()
-                .email(user.email())
-                .username(user.email())
-                .build();
-    }
 
 }
