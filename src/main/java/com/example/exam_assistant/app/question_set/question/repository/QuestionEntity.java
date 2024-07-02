@@ -5,6 +5,7 @@ import com.example.exam_assistant.app.question_set.answer.repository.AnswerEntit
 import com.example.exam_assistant.app.question_set.repository.QuestionSetEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.HashSet;
@@ -17,6 +18,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Table(name = "questions")
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
 public class QuestionEntity {
 
     @Id
@@ -32,7 +34,7 @@ public class QuestionEntity {
     private QuestionSetEntity questionSet;
 
     @OneToMany(fetch = LAZY, orphanRemoval = true)
-    @JoinColumn(name = "question_entity_id")
+    @JoinColumn(name = "question_id")
     private Set<AnswerEntity> answers = new HashSet<>();
 
 }

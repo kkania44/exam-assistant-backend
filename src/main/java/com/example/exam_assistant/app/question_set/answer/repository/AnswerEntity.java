@@ -9,6 +9,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
@@ -17,6 +18,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Table(name = "answers")
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
 public class AnswerEntity {
 
     @Id
@@ -25,7 +27,6 @@ public class AnswerEntity {
     private String content;
     private boolean correct;
     @ManyToOne
-    @JoinColumn(name = "question_id")
     private QuestionEntity question;
 
 }
