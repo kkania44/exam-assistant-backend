@@ -9,14 +9,14 @@ public class ExceptionBody implements Serializable {
 
     private final ExceptionMessage message;
     private final LocalDateTime timestamp;
-    private Object details;
+    private String details;
 
     public ExceptionBody(ExceptionMessage message) {
         this.message = message;
         this.timestamp = now();
     }
 
-    public ExceptionBody(ExceptionMessage message, Object details) {
+    public ExceptionBody(ExceptionMessage message, String details) {
         this.message = message;
         this.details = details;
         this.timestamp = now();
