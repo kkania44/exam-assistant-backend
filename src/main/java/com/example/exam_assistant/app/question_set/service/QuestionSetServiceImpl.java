@@ -2,6 +2,7 @@ package com.example.exam_assistant.app.question_set.service;
 
 import com.example.exam_assistant.app.question_set.dto.CreateQuestionSetDto;
 import com.example.exam_assistant.app.question_set.dto.QuestionSet;
+import com.example.exam_assistant.app.question_set.exception.QuestionSetAlreadyExists;
 import com.example.exam_assistant.app.question_set.question.repository.QuestionRepository;
 import com.example.exam_assistant.app.question_set.question.dto.Question;
 import com.example.exam_assistant.app.question_set.repository.QuestionSetEntity;
@@ -33,6 +34,9 @@ class QuestionSetServiceImpl implements QuestionSetService {
     public QuestionSet create(CreateQuestionSetDto questionSet) {
         UserEntity userEntity = userRepository.findById(questionSet.userId())
                 .orElseThrow(UserNotFoundException::new);
+        if (questionSetRepository.existsByNameAndUserId(questionSet.name(), questionSet.userId())) {
+            throw new QuestionSetAlreadyExists();
+        }
         QuestionSetEntity questionSetEntity = QuestionSetEntity.fromDtoAndUser(questionSet, userEntity);
         questionSetRepository.save(questionSetEntity);
         return QuestionSet.fromEntity(questionSetEntity);
